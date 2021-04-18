@@ -2,13 +2,14 @@ const express = require('express');
 const server = express();
 const {logger} = require("./middleware/middleware")
 const projectRouter = require("./projects/projects-router")
+const actionsRouter = require("./actions/actions-router")
 
 // Complete your server here!
 // Do NOT `server.listen()` inside this file!
 server.use(express.json())
 server.use(logger())
 server.use(projectRouter)
-
+server.use(actionsRouter)
 
 server.get('/api/test', (req, res) => {
   res.status(200).json({
