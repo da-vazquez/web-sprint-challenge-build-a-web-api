@@ -7,7 +7,7 @@ const projectRouter = require("./projects/projects-router")
 // Do NOT `server.listen()` inside this file!
 server.use(express.json())
 server.use(logger())
-
+server.use(projectRouter)
 
 
 server.get('/api/test', (req, res) => {
@@ -17,5 +17,11 @@ server.get('/api/test', (req, res) => {
 	})
 })
 
+server.use((err, req, res, next) => {
+  console.log(err)
+
+  res.status(500).json({message: "Something went wrong..."})
+
+})
 
 module.exports = server;
