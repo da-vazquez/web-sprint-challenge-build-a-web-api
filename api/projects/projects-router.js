@@ -29,4 +29,22 @@ router.post("/api/projects", validatePost(), (req, res, next) => {
     .catch(next)
 })
 
+
+router.put("/api/projects/:id", validateID(), validatePost(), (req, res, next) => {
+  projects.update(req.params.id, req.body)
+    .then(project => {
+      res.status(200).json(project)
+    })
+    .catch(next)
+})
+
+
+router.delete("/api/projects/:id", validateID(), (req, res, next) => {
+  projects.remove(req.params.id)
+    .then(() => {
+      res.status(200).json({message: "The project has successfully been deleted"})
+    })
+    .catch(next)
+})
+
 module.exports = router
