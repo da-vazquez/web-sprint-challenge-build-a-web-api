@@ -47,4 +47,13 @@ router.delete("/api/projects/:id", validateProjectID(), (req, res, next) => {
     .catch(next)
 })
 
+
+router.get("/api/projects/:id/actions", validateProjectID(), (req, res) => {
+  projects.getProjectActions(req.project.id)
+    res.json(req.project)
+
+})
+
+
+
 module.exports = router

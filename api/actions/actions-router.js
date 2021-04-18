@@ -30,5 +30,22 @@ router.post("/api/actions", validateActionPost(), (req, res, next) => {
 })  
 
 
+router.put("/api/actions/:id", validateActionID(), validateActionPost(), (req, res, next) => {
+  actions.update(req.params.id, req.body)
+    .then(action => {
+      res.status(200).json(action)
+    })
+    .catch(next)
+})
+
+
+router.delete("/api/actions/:id", validateActionID(), (req, res, next) => {
+  actions.remove(req.params.id)
+    .then(() => {
+      res.status(200).json({message: "The action has successfully been deleted"})
+    })
+    .catch(next)
+})
+
 
 module.exports = router
