@@ -48,10 +48,12 @@ router.delete("/api/projects/:id", validateProjectID(), (req, res, next) => {
 })
 
 
-router.get("/api/projects/:id/actions", validateProjectID(), (req, res) => {
-  projects.getProjectActions(req.project.id)
-    res.json(req.project)
-
+router.get("/api/projects/:id/actions", validateProjectID(), (req, res, next) => {
+  projects.getProjectActions(req.params.id)
+    .then(action => {
+      res.json(action)
+    })
+    .catch(next)
 })
 
 
